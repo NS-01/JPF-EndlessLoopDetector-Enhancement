@@ -7,7 +7,10 @@ Therefore, the purpose of this project is to enhance the EndlessLoopDetector lis
 ### Milestones
 1. Enhance the EndlessLoopDetector listener to detect if a program is caught in an infinite recursion.
 2. Enhance the EndlessLoopDetector listener documentation to provide the configuration details that will allow a user to set the threshold value that will be validated against when considering if the program is in an endless loop.
-3. Return analysis (line of code in the program and/or in which state the endless loop occurs) when the program is detected to be caught in an endless loop.
+3. Return analysis when the program is detected to be caught in an endless loop.
+* Line of code
+* Method/instruction Name
+* Memory
 4. Test suite to test the enhanced functionality of the listener.
 
 #### The first milestone is optional.
