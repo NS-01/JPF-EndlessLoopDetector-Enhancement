@@ -117,7 +117,8 @@ public class EndlessLoopDetector extends IdleFilter {
 			if (this.checkFinished(instruction)) {
 				// stop
 				// have to find a better way to do this.
-				vm.terminateProcess(thread);
+				//vm.terminateProcess(thread);
+				vm.getSearch().terminate();
 			}
 
 		}

@@ -5,9 +5,8 @@ public class InfiniteRecursion {
 	}
 
 	public static String recursiveMethod() {
-		/*
-		 * for(int i = 0; i < 2 ; i++) { recursiveMethod(); }
-		 */
+		for(int i = 0; i < 2 ; i++) { recursiveMethod(); }
+		
 		return recursiveMethod();
 	}
 }
