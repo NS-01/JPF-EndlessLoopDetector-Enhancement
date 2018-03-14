@@ -1,3 +1,4 @@
 target = DiningPhil
+listener=gov.nasa.jpf.listener.EndlessLoopDetector
 
 search.class = .search.heuristic.BFSHeuristic

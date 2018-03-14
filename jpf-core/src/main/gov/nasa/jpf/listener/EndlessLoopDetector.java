@@ -28,6 +28,7 @@ import java.util.List;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.annotation.JPFOption;
 import gov.nasa.jpf.annotation.JPFOptions;
+import gov.nasa.jpf.report.ConsolePublisher;
 import gov.nasa.jpf.search.Search;
 import gov.nasa.jpf.vm.Instruction;
 import gov.nasa.jpf.vm.MethodInfo;
@@ -100,7 +101,7 @@ public class EndlessLoopDetector extends IdleFilter {
 	 */
 	@Override
 	public void executeInstruction(VM vm, ThreadInfo thread, Instruction instruction) {
-		if (this.inMain) {
+		if (this.inMain && !foundEndlessLoop) {
 			String currentMethodName = instruction.getMethodInfo().getName();
 			if (this.methodCalls.containsKey(currentMethodName)) {
 				// update count
@@ -114,20 +115,39 @@ public class EndlessLoopDetector extends IdleFilter {
 				this.methodCalls.put(currentMethodName, 1);
 			}
 
-			if (this.checkFinished(instruction)) {
+			if (this.checkFinished(instruction, vm.getSearch())) {
 				// stop
 				// have to find a better way to do this.
-				//vm.terminateProcess(thread);
 				vm.getSearch().terminate();
+				thread.breakTransition(true);
+				//vm.terminateProcess(thread);
 			}
-
+			//vm.getSearch().p
+			//ConsolePublisher.printStatistics(console, reporter);
+		}
+	}
+	
+	/**
+	 * Whenever JPF exits a method, checks if it is the main method.
+	 *
+	 * @param vm
+	 *            JPF's virtual machine.
+	 * @param thread
+	 *            the thread currently executing.
+	 * @param method
+	 *            the method that is entered.
+	 */
+	@Override
+	public void methodExited(VM vm, ThreadInfo thread, MethodInfo method) {
+		if (method.getFullName().contains("main([Ljava/lang/String;)V")) {
+			this.inMain = false;
 		}
 	}
 
 	/**
 	 * Verifies if an endless loop is found
 	 */
-	private boolean checkFinished(Instruction instruction) {
+	private boolean checkFinished(Instruction instruction, Search search) {
 		if (this.foundEndlessLoop) {
 			this.information
 					.add("Infinite Recursion detected at Line Number : " + String.valueOf(instruction.getLineNumber()));
