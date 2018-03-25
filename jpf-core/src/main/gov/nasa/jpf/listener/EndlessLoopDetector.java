@@ -101,7 +101,7 @@ public class EndlessLoopDetector extends IdleFilter {
 	 */
 	@Override
 	public void executeInstruction(VM vm, ThreadInfo thread, Instruction instruction) {
-		if (this.inMain && !foundEndlessLoop) {
+		while (this.inMain && !foundEndlessLoop) {
 			String currentMethodName = instruction.getMethodInfo().getName();
 			if (this.methodCalls.containsKey(currentMethodName)) {
 				// update count
@@ -114,17 +114,25 @@ public class EndlessLoopDetector extends IdleFilter {
 				// add count = 1
 				this.methodCalls.put(currentMethodName, 1);
 			}
-
-			if (this.checkFinished(instruction, vm.getSearch())) {
+		}
+			if (this.checkFinished(instruction)) {
 				// stop
 				// have to find a better way to do this.
-				vm.getSearch().terminate();
+				//vm.getSearch().terminate();
 				thread.breakTransition(true);
 				//vm.terminateProcess(thread);
 			}
 			//vm.getSearch().p
 			//ConsolePublisher.printStatistics(console, reporter);
-		}
+		//}
+		//thread.breakTransition(true);
+	//	if (this.checkFinished(instruction)) {
+			// stop
+			// have to find a better way to do this.
+			//vm.getSearch().terminate();
+			//thread.breakTransition(true);
+			//vm.terminateProcess(thread);
+	//	}
 	}
 	
 	/**
@@ -147,7 +155,7 @@ public class EndlessLoopDetector extends IdleFilter {
 	/**
 	 * Verifies if an endless loop is found
 	 */
-	private boolean checkFinished(Instruction instruction, Search search) {
+	private boolean checkFinished(Instruction instruction) {
 		if (this.foundEndlessLoop) {
 			this.information
 					.add("Infinite Recursion detected at Line Number : " + String.valueOf(instruction.getLineNumber()));
