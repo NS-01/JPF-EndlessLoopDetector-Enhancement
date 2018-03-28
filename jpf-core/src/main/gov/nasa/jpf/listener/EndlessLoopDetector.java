@@ -21,7 +21,6 @@ package gov.nasa.jpf.listener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.annotation.JPFOption;
 import gov.nasa.jpf.annotation.JPFOptions;
@@ -83,8 +82,9 @@ public class EndlessLoopDetector extends IdleFilter {
 	}
 
 	/**
-	 * Whenever JPF enters a method, checks if it is the main method.
-	 *
+	 * Whenever JPF enters a method, checks if it is the main method. Also
+	 * increments counter if a non-main method is entered.
+	 * 
 	 * @param vm
 	 *            JPF's virtual machine.
 	 * @param thread
@@ -97,12 +97,9 @@ public class EndlessLoopDetector extends IdleFilter {
 		if (method.getFullName().contains("main([Ljava/lang/String;)V")) {
 			this.inMain = true;
 		}
-
 		if (this.inMain) {
-			// while (!this.foundEndlessLoop) {
 			String currentMethodName = method.getName();
 			if (!(currentMethodName.equals("main"))) {
-
 				if (this.methodCalls.containsKey(currentMethodName)) {
 					// update count
 					if (this.methodCalls.get(currentMethodName) >= this.maxTime) {
@@ -115,32 +112,32 @@ public class EndlessLoopDetector extends IdleFilter {
 					// add count = 1
 					this.methodCalls.put(currentMethodName, 1);
 				}
-
 			}
 			if (checkFinished()) {
-				// vm.getSearch().notifySearchProbed(); -- required for randomsearch strategy
-				// break;
 				thread.breakTransition("EndlessLoop Detected");
-
 			}
-
-			// }
-			// thread.breakTransition("EndlessLoop Detected - Infinite Recursion");
 		}
-
 	}
 
+	/**
+	 * Decrements the count of the method exiting, once it finishes executing.
+	 * 
+	 * @param vm
+	 *            JPF's virtual machine.
+	 * @param currentThread
+	 *            the current thread.
+	 * @param exitedMethod
+	 *            the method that is existing.
+	 */
 	@Override
 	public void methodExited(VM vm, ThreadInfo currentThread, MethodInfo exitedMethod) {
 		if (this.inMain) {
 			String executedMethodName = exitedMethod.getName();
 			if (!(executedMethodName.equals("main"))) {
 				if (this.methodCalls.containsKey(executedMethodName)) {
-					// decrement counter by 1
 					this.methodCalls.put(executedMethodName, this.methodCalls.get(executedMethodName) - 1);
 				}
 			}
-
 		}
 	}
 
@@ -165,6 +162,9 @@ public class EndlessLoopDetector extends IdleFilter {
 		}
 	}
 
+	/**
+	 * Checks if endless loop is found
+	 */
 	@Override
 	public boolean check(Search search, VM vm) {
 		return !foundEndlessLoop;
