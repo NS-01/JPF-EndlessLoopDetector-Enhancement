@@ -1,5 +1,5 @@
 target=InfiniteRecursion
-classpath=/Users/guru/Documents/GitHub/JPF-EndlessLoopDetector-Enhancement/InfiniteRecursionModel/bin
+classpath=/Users/Varsha/Desktop/eclipse-workspace/InfiniteRecursionModel/bin
 search.class=gov.nasa.jpf.search.RandomSearch
 cg.enumerate_random=true 
 listener=gov.nasa.jpf.listener.EndlessLoopDetector
