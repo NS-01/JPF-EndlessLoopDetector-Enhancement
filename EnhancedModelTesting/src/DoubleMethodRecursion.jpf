@@ -1,7 +1,8 @@
-target=terminatingModel.SearchLoop
+target=nonterminatingRecursionModel.DoubleMethodRecursion
 classpath=/Users/Varsha/Desktop/eclipse-workspace/EnhancedModelTesting/bin
 #search.class=gov.nasa.jpf.search.RandomSearch
 search.class=.search.heuristic.BFSHeuristic
 cg.enumerate_random=true 
 listener=gov.nasa.jpf.listener.EndlessLoopDetector
 endlessloopdetector.max_loops=5
+idle.max_backjumps=5
