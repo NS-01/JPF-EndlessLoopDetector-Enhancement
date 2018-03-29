@@ -9,13 +9,20 @@ public class DoubleMethodRecursion {
 	 */
 	public static void main(String[] args) {
 		DoubleMethodRecursion doubleMethodRecursion = new DoubleMethodRecursion();
+		// circularity -- infinite loop
 		doubleMethodRecursion.methodA();
 	}
 
+	/**
+	 * Invokes methodB. Causes circularity between the two methods.
+	 */
 	public void methodA() {
 		methodB();
 	}
 
+	/**
+	 * Invokes methodA. Causes circularity between the two methods.
+	 */
 	public void methodB() {
 		methodA();
 	}
