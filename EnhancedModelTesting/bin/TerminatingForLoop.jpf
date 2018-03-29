@@ -1,0 +1,6 @@
+target=terminatingModel.TerminatingForLoop
+classpath=/Users/Varsha/Desktop/eclipse-workspace/EndlessLoopModelTesting/bin
+#search.class=gov.nasa.jpf.search.RandomSearch
+search.class=.search.heuristic.BFSHeuristic
+cg.enumerate_random=true 
+listener=gov.nasa.jpf.listener.EndlessLoopDetector

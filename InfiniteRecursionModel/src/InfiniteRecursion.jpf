@@ -1,3 +1,4 @@
+#<<<<<<< HEAD
 target=InfiniteRecursion
 classpath=C:/Users/guru/Documents/GitHub/JPF-EndlessLoopDetector-Enhancement/InfiniteRecursionModel/bin
 #search.class=gov.nasa.jpf.search.RandomSearch
@@ -7,3 +8,11 @@ listener=gov.nasa.jpf.listener.EndlessLoopDetector
 #endlessloopdetector.max_loops=5
 endlessloopdetector.max_loops=100
 idle.max_backjumps=30
+#=======
+#target=InfiniteRecursion
+#classpath=/Users/guru/Documents/GitHub/JPF-EndlessLoopDetector-Enhancement/InfiniteRecursionModel/bin
+#search.class=gov.nasa.jpf.search.RandomSearch
+#cg.enumerate_random=true 
+#listener=gov.nasa.jpf.listener.EndlessLoopDetector
+#endlessloopdetector.max_loops=5
+#>>>>>>> master
