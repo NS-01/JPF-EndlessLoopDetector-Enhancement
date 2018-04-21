@@ -1,0 +1,11 @@
+target=nonterminatingLoopModel.MemoryLeak
+classpath=/Users/Varsha/Desktop/eclipse-workspace/EnhancedModelTesting/bin
+search.class=.search.heuristic.BFSHeuristic
+listener=gov.nasa.jpf.listener.EndlessLoopDetector
+search.min_free=92000000
+
+#listener=gov.nasa.jpf.listener.BudgetChecker
+#listener=gov.nasa.jpf.listener.StateSpaceAnalyzer
+#ssa.max_memory=12
+#budget.max_heap=10000
+
