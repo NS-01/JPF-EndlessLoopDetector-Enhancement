@@ -30,19 +30,23 @@ import gov.nasa.jpf.vm.ThreadInfo;
 import gov.nasa.jpf.vm.VM;
 
 /**
- * Configuration : endlessloopdetector.max_loops - allows user to set maximum
- * number of times a method can execute before considering current execution an
- * infinitely recursive method, thereby an endless loop
- */
-@JPFOptions({
-		@JPFOption(type = "Long", key = "endlessloopdetector.max_loops", defaultValue = "500", comment = "stop search after specified number of loops have occurred") })
-
-/**
  * Configuration : idle.max_backjumps (found in
  * gov.nasa.jpf.listener.IdleFilter) - allows user to set the maximum number of
  * backjumps that can occur before considering current execution an endless loop
  */
-
+@JPFOptions({
+		/**
+		 * Configuration : endlessloopdetector.max_loops - allows user to set maximum
+		 * number of times a method can execute before considering current execution an
+		 * infinitely recursive method, thereby an endless loop
+		 */
+		@JPFOption(type = "Long", key = "endlessloopdetector.max_loops", defaultValue = "500", comment = "stop search after specified number of loops have occurred"),
+		/**
+		 * Configuration : endlessloopdetector.max_heap_size - allows user to set
+		 * maximum size for memory heap that a program can consume without causing a
+		 * memory issue.
+		 */
+		@JPFOption(type = "Long", key = "endlessloopdetector.max_heap", defaultValue = "-1", comment = "stop search when VM heapsize reaches specified limit") })
 /**
  * little listener that tries to detect endless while() loops by counting
  * backjumps, breaking transitions if the count exceeds a threshold, and then
@@ -60,6 +64,12 @@ public class EndlessLoopDetector extends IdleFilter {
 	// max time set by configuration
 	private long maxTime;
 
+	// Memory Usage
+	private Hashtable<String, Integer> memUse = new Hashtable<String, Integer>();
+
+	// max heap size set by configuration
+	private long maxMemory;
+
 	// checker to identify endless loop detection
 	private boolean foundEndlessLoop = false;
 
@@ -71,6 +81,7 @@ public class EndlessLoopDetector extends IdleFilter {
 		super(config);
 		// default times recursion can occur before considering infinite is 500
 		this.maxTime = config.getDuration("endlessloopdetector.max_loops", 500);
+		this.maxMemory = config.getMemorySize("endlessloopdetector.max_heap", 0);
 		this.information = new ArrayList<String>();
 	}
 
@@ -112,6 +123,15 @@ public class EndlessLoopDetector extends IdleFilter {
 					// add count = 1
 					this.methodCalls.put(currentMethodName, 1);
 				}
+			}
+
+			/*
+			 * addition check if memory used exceeds a memory allocated
+			 */
+			if (!vm.getSearch().checkStateSpaceLimit()) {
+				foundEndlessLoop = true;
+				// this.information.add("memory limit reached: " +
+				// vm.getSearch().getSearchConstraint().toString());
 			}
 			if (checkFinished()) {
 				thread.breakTransition("EndlessLoop Detected");

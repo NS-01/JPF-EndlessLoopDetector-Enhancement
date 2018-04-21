@@ -1,0 +1,4 @@
+target=terminatingModel.TerminatingSuspiciousForLoop
+classpath=/Users/Varsha/Desktop/eclipse-workspace/EnhancedModelTesting/bin
+search.class=.search.heuristic.DFSHeuristic
+listener=gov.nasa.jpf.listener.EndlessLoopDetector
