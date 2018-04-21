@@ -5,13 +5,13 @@ import java.util.Random;
 /**
  * Endless random search class that does not terminate the search.
  * 
- * @author Varsha
+ * @author Varsha Ragavendran
  *
  */
-public class SearchLoop {
+public class TerminatingSearchLoop {
 
 	public static void main(String[] args) {
-		SearchLoop searchLoop = new SearchLoop();
+		TerminatingSearchLoop searchLoop = new TerminatingSearchLoop();
 		searchLoop.search();
 	}
 

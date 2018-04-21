@@ -1,5 +1,14 @@
 package nonterminatingLoopModel;
 
+/**
+ * Problematic Code
+ * 
+ * Noncompliant Suspicious For Loop - Infinite execution causing JPF to run out
+ * of memory
+ * 
+ * @author Nisha Sharma
+ *
+ */
 public class SuspiciousForLoop {
 	public static void main(String args[]) {
 		System.out.println("Counter: " + increment());

@@ -3,6 +3,15 @@ package nonterminatingRecursionModel;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Tournament tree is a form of min/max heap which is a complete binary tree.
+ * Every external node represents a player and internal node represents winner.
+ * In a tournament tree every internal node contains winner and every leaf node
+ * contains one player.
+ * 
+ * @author Varsha Ragavendran
+ *
+ */
 public class TournamentTree {
 	public static void main(String[] args) {
 		TournamentTree tt = new TournamentTree();

@@ -1,10 +1,12 @@
 package terminatingModel;
 
 /**
+ * Correct code.
+ * 
  * Class that invokes a method based on the number of times specified.
  * Guarenteed to terminate.
  * 
- * @author Varsha
+ * @author Varsha Ragavendran
  *
  */
 public class TerminatingForLoop {

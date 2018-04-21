@@ -1,4 +1,4 @@
-target=terminatingModel.SearchLoop
+target=terminatingModel.TerminatingSearchLoop
 classpath=/Users/Varsha/Desktop/eclipse-workspace/EnhancedModelTesting/bin
 #search.class=gov.nasa.jpf.search.RandomSearch
 search.class=.search.heuristic.BFSHeuristic

@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * A program which keeps writing infinitely utilizing a lot of memory.
  * 
- * @author Nisha
+ * @author Nisha Sharma
  *
  */
 public class ListGenerator {
