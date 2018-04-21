@@ -2,6 +2,13 @@ package nonterminatingRecursionModel;
 
 import java.util.Random;
 
+/**
+ * Recursive call between two methods with switch statements - causing infinite
+ * recursion.
+ * 
+ * @author Varsha Ragavendran
+ *
+ */
 public class SwitchRecursion {
 	// constant number used in switch
 	final int SWITCHCOUNT = 0;
@@ -22,7 +29,7 @@ public class SwitchRecursion {
 	}
 
 	/**
-	 * 
+	 * Recursive call to switchTwo
 	 */
 	public void switchOne() {
 		while (true) {
@@ -36,7 +43,7 @@ public class SwitchRecursion {
 	}
 
 	/**
-	 * 
+	 * Recursive call to switchOne
 	 */
 	public void switchTwo() {
 		switch (SWITCHCOUNT) {

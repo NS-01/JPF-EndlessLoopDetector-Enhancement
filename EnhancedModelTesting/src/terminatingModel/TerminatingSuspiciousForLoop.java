@@ -1,7 +1,11 @@
 package terminatingModel;
 
 /**
- * @author Nisha
+ * Correct code.
+ * 
+ * Compliant Suspicious For Loop
+ * 
+ * @author Nisha Sharma
  *
  */
 public class TerminatingSuspiciousForLoop {

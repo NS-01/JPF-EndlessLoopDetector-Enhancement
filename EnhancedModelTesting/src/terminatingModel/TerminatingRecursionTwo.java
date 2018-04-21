@@ -1,5 +1,13 @@
 package terminatingModel;
 
+/**
+ * Correct code.
+ * 
+ * Another Recursive method example.
+ * 
+ * @author Nisha Sharma
+ *
+ */
 public class TerminatingRecursionTwo {
 	// recursion should stop after 9 attempts
 	static int stopindex = 9;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Class to mock memory leak
  * 
- * @author Nisha
+ * @author Nisha Sharma
  *
  */
 public class MemoryLeak {

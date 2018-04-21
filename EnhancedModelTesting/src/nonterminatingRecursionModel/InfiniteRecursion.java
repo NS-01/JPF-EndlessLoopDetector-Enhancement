@@ -3,7 +3,7 @@ package nonterminatingRecursionModel;
 /**
  * Recursive method executed endlessly
  * 
- * @author Varsha
+ * @author Varsha Ragavendran , Nisha Sharma
  *
  */
 public class InfiniteRecursion {

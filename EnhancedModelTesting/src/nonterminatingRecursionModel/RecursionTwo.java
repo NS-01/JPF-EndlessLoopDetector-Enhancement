@@ -1,9 +1,22 @@
 package nonterminatingRecursionModel;
 
+/**
+ * Problematic Code.
+ * 
+ * Another Recursive method example.
+ * 
+ * @author Nisha Sharma
+ *
+ */
 public class RecursionTwo {
 	// recursion should stop after 9 attempts
-	static int stopindex = 9;
-	
+	final static int STOPINDEX = 9;
+
+	/**
+	 * Main method used for executing/verifying jpf config file
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// a=number of "O"s and b=number of "X"s
 		int a = 9;
@@ -13,12 +26,12 @@ public class RecursionTwo {
 
 	// Problem
 	public static void recursion(int a, int b) {
-		
+
 		// start of recursion at index 1
 		int startindex = 1;
 
 		// stop condition of recursion
-		if (startindex == stopindex)
+		if (startindex == STOPINDEX)
 			return;
 
 		// printing of pattern

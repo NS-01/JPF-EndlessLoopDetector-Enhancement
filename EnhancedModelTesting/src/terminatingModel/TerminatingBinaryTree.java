@@ -1,7 +1,20 @@
 package terminatingModel;
 
+/**
+ * Correct Code.
+ * 
+ * A tree data structure in which each node has at most two children, which are
+ * referred to as the left child and the right child.
+ * 
+ * @author Varsha Ragavendran
+ *
+ */
 public class TerminatingBinaryTree {
-
+	/**
+	 * Main method used for executing/verifying jpf config file
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		TerminatingBinaryTree binaryTree = new TerminatingBinaryTree();
 		binaryTree.add(50);
@@ -14,6 +27,20 @@ public class TerminatingBinaryTree {
 		binaryTree.add(65);
 		binaryTree.add(60);
 		binaryTree.inOrderTraversal(binaryTree.root);
+	}
+
+	// Node Data Structure
+	public class Node {
+		int data;
+		Node left;
+		Node right;
+		Node parent;
+
+		public Node(int d) {
+			data = d;
+			left = null;
+			right = null;
+		}
 	}
 
 	Node root = null;
@@ -49,6 +76,7 @@ public class TerminatingBinaryTree {
 		}
 	}
 
+	// correct version
 	public void inOrderTraversal(Node node) {
 		if (node != null) {
 			inOrderTraversal(node.left);
@@ -57,16 +85,4 @@ public class TerminatingBinaryTree {
 		}
 	}
 
-	public class Node {
-		int data;
-		Node left;
-		Node right;
-		Node parent;
-
-		public Node(int d) {
-			data = d;
-			left = null;
-			right = null;
-		}
-	}
 }

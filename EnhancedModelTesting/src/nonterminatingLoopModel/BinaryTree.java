@@ -1,45 +1,73 @@
 package nonterminatingLoopModel;
 
+/**
+ * Problematic Code.
+ * 
+ * A tree data structure in which each node has at most two children, which are
+ * referred to as the left child and the right child.
+ * 
+ * @author Varsha Ragavendran
+ *
+ */
 public class BinaryTree {
-
+	/**
+	 * Main method used for executing/verifying jpf config file
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		BinaryTree binaryTree = new BinaryTree();
-		binaryTree.add(50);
-		binaryTree.add(40);
-		binaryTree.add(39);
-		binaryTree.add(42);
-		binaryTree.add(41);
-		binaryTree.add(43);
-		binaryTree.add(55);
-		binaryTree.add(65);
-		binaryTree.add(60);
-		binaryTree.inOrderTraversal(binaryTree.root);
+		BinaryTree bT = new BinaryTree();
+		bT.addNode(50);
+		bT.addNode(40);
+		bT.addNode(39);
+		bT.addNode(42);
+		bT.addNode(41);
+		bT.addNode(43);
+		bT.addNode(55);
+		bT.addNode(65);
+		bT.addNode(60);
+		bT.inOrderTraversal(bT.root);
 	}
 
-	Node root = null;
+	// Node Data Structure
+	public class Node {
+		int data;
+		Node leftNode;
+		Node rightNode;
+		Node parentNode;
 
-	public void add(int d) {
+		public Node(int d) {
+			data = d;
+			leftNode = null;
+			rightNode = null;
+		}
+	}
+
+	private Node root = null;
+
+	public void addNode(int d) {
 		Node newNode = new Node(d);
 		if (root != null) {
-
-			Node futureParent = root;
+			Node futureRoot = root;
 			while (true) {
-				if (newNode.data < futureParent.data) // going left
-				{
-					if (futureParent.left == null) {
-						futureParent.left = newNode;
-						newNode.parent = futureParent;
+				// going left
+				if (newNode.data < futureRoot.data) {
+					if (futureRoot.leftNode == null) {
+						futureRoot.leftNode = newNode;
+						newNode.parentNode = futureRoot;
 						break;
 					}
-					futureParent = futureParent.left;
+					futureRoot = futureRoot.leftNode;
 
-				} else {
-					if (futureParent.right == null) {
-						futureParent.right = newNode;
-						newNode.parent = futureParent;
+				}
+				// going right
+				else {
+					if (futureRoot.rightNode == null) {
+						futureRoot.rightNode = newNode;
+						newNode.parentNode = futureRoot;
 						break;
 					}
-					futureParent = futureParent.right;
+					futureRoot = futureRoot.rightNode;
 				}
 
 			}
@@ -49,27 +77,15 @@ public class BinaryTree {
 		}
 	}
 
+	// Problematic code
 	public void inOrderTraversal(Node node) {
 		// You don't need the while() loop in your inOrderTraversal(). It is a recursive
-		// call. It's causing an endless loop.However, you do need something to stop the
-		// recursion. You only recurse if the node is not null. Should be if.
+		// call. It's causing an endless loop. You only recurse if the node is not null.
+		// Should be if.
 		while (node != null) {
-			inOrderTraversal(node.left);
+			inOrderTraversal(node.leftNode);
 			System.out.println(node.data);
-			inOrderTraversal(node.right);
-		}
-	}
-
-	public class Node {
-		int data;
-		Node left;
-		Node right;
-		Node parent;
-
-		public Node(int d) {
-			data = d;
-			left = null;
-			right = null;
+			inOrderTraversal(node.rightNode);
 		}
 	}
 }

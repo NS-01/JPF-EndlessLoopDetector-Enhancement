@@ -1,5 +1,11 @@
 package nonterminatingRecursionModel;
 
+/**
+ * Infinite Recursion between two methods causing circularity
+ * 
+ * @author Varsha Ragavendran, Nisha Sharma
+ *
+ */
 public class DoubleMethodRecursion {
 
 	/**
