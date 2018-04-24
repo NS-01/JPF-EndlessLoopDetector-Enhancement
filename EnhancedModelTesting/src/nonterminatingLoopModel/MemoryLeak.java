@@ -10,6 +10,9 @@ import java.util.ArrayList;
  * EndlessLoopDetector verifies that statespacelimit has not reached, to verify
  * if JPF will run out of memory.
  * 
+ * NOTE: THIS CLASS TAKES A LONG TIME TO EXECUTE, BUT DOES COMPLETE EXECUTION
+ * WITH AN ERROR DETECTED BY THE ENDLESSLOOPDETECTOR LISTENER
+ * 
  * @author Nisha Sharma
  *
  */
