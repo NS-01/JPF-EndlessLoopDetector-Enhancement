@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Class to mock memory leak
+ * Problematic Code.
+ * 
+ * Memory Leak causes JPF to run out of memory when executing an infinite loop.
+ * EndlessLoopDetector verifies that statespacelimit has not reached, to verify
+ * if JPF will run out of memory.
  * 
  * @author Nisha Sharma
  *
  */
 public class MemoryLeak {
-	public static List list = new ArrayList();
+	public static List<Integer> list = new ArrayList<Integer>();
 
 	/**
 	 * @param args
+	 *            Loops forever causing JPF to run out of memory.
 	 */
 	public static void main(String[] args) {
 		for (int i = 0; i >= 0; i++) {

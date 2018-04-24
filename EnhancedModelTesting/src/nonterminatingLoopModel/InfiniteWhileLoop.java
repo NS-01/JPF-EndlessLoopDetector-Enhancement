@@ -1,6 +1,8 @@
 package nonterminatingLoopModel;
 
 /**
+ * Problematic Code.
+ * 
  * This class consists of infinite while / for loops. To be tested with Endless
  * Loop Detector in JPF-Core
  * 
