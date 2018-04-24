@@ -40,13 +40,7 @@ import gov.nasa.jpf.vm.VM;
 		 * number of times a method can execute before considering current execution an
 		 * infinitely recursive method, thereby an endless loop
 		 */
-		@JPFOption(type = "Long", key = "endlessloopdetector.max_loops", defaultValue = "500", comment = "stop search after specified number of loops have occurred"),
-		/**
-		 * Configuration : endlessloopdetector.max_heap_size - allows user to set
-		 * maximum size for memory heap that a program can consume without causing a
-		 * memory issue.
-		 */
-		@JPFOption(type = "Long", key = "endlessloopdetector.max_heap", defaultValue = "-1", comment = "stop search when VM heapsize reaches specified limit") })
+		@JPFOption(type = "Long", key = "endlessloopdetector.max_loops", defaultValue = "500", comment = "stop search after specified number of loops have occurred") })
 /**
  * little listener that tries to detect endless while() loops by counting
  * backjumps, breaking transitions if the count exceeds a threshold, and then
@@ -64,12 +58,6 @@ public class EndlessLoopDetector extends IdleFilter {
 	// max time set by configuration
 	private long maxTime;
 
-	// Memory Usage
-	private Hashtable<String, Integer> memUse = new Hashtable<String, Integer>();
-
-	// max heap size set by configuration
-	private long maxMemory;
-
 	// checker to identify endless loop detection
 	private boolean foundEndlessLoop = false;
 
@@ -81,7 +69,6 @@ public class EndlessLoopDetector extends IdleFilter {
 		super(config);
 		// default times recursion can occur before considering infinite is 500
 		this.maxTime = config.getDuration("endlessloopdetector.max_loops", 500);
-		this.maxMemory = config.getMemorySize("endlessloopdetector.max_heap", 0);
 		this.information = new ArrayList<String>();
 	}
 
@@ -125,13 +112,11 @@ public class EndlessLoopDetector extends IdleFilter {
 				}
 			}
 
-			/*
-			 * addition check if memory used exceeds a memory allocated
-			 */
+			// Possibility of JPF to run out of memory when executing an infinite loop.
+			// verifying that statespacelimit has not reached, if it has, program executing
+			// is considered to be stuck in infinite loop
 			if (!vm.getSearch().checkStateSpaceLimit()) {
 				foundEndlessLoop = true;
-				// this.information.add("memory limit reached: " +
-				// vm.getSearch().getSearchConstraint().toString());
 			}
 			if (checkFinished()) {
 				thread.breakTransition("EndlessLoop Detected");
